@@ -8,6 +8,8 @@ export default function Home() {
     { title: "test Todo", id: uuid(), done: true },
   ]);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const handleDeleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -36,11 +38,19 @@ export default function Home() {
 
   const activeTodos = todos.filter(({ done }) => !done);
   const doneTodos = todos.filter(({ done }) => done);
+  const filterTodos = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
+  // Suche von Todos
   return (
     <div className="main">
       <div>
-        <input type="text" placeholder="search"></input>
+        <input
+          onChange={(event) => setSearchQuery(event.target.value)}
+          type="text"
+          placeholder="search"
+        ></input>
       </div>
 
       <div>
@@ -56,19 +66,29 @@ export default function Home() {
           ></input>
         </div>
 
-        <TodoList
-          title="Zu erledigen"
-          list={activeTodos}
-          onDeleteTodo={handleDeleteTodo}
-          onToggleTodo={toggleTodo}
-        />
-
-        <TodoList
-          title="Erledigt"
-          list={doneTodos}
-          onDeleteTodo={handleDeleteTodo}
-          onToggleTodo={toggleTodo}
-        />
+        {searchQuery ? (
+          <TodoList
+            title="Suchergebnisse"
+            list={filterTodos}
+            onDeleteTodo={handleDeleteTodo}
+          />
+        ) : (
+          <>
+            {" "}
+            <TodoList
+              title="Zu erledigen"
+              list={activeTodos}
+              onDeleteTodo={handleDeleteTodo}
+              onToggleTodo={toggleTodo}
+            />
+            <TodoList
+              title="Erledigt"
+              list={doneTodos}
+              onDeleteTodo={handleDeleteTodo}
+              onToggleTodo={toggleTodo}
+            />
+          </>
+        )}
       </div>
     </div>
   );
