@@ -12,7 +12,9 @@ const TodoItem = ({ id, done, title, onToggleTodo, onDeleteTodo }) => {
           type="checkbox"
         />
         <p>{title}</p>
-        <button onClick={() => onDeleteTodo(id)}>Löschen</button>
+        <button onClick={() => {
+            onDeleteTodo(id)
+          }}>Löschen</button>
       </div>
     </div>
   );
