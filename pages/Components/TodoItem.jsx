@@ -6,7 +6,9 @@ const TodoItem = ({ id, done, title, onToggleTodo, onDeleteTodo }) => {
       <div key={id} className="TodoItem">
         <input
           checked={done}
-          onChange={() => onToggleTodo(id)}
+          onChange={() => {
+            onToggleTodo(id);
+          }
           type="checkbox"
         />
         <p>{title}</p>
