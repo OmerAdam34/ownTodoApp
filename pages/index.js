@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import TodoItem from "./components/TodoItem";
 import TodoList from "./Components/TodoList";
 
 export default function Home() {
@@ -74,7 +73,6 @@ export default function Home() {
           />
         ) : (
           <>
-            {" "}
             <TodoList
               title="Zu erledigen"
               list={activeTodos}
