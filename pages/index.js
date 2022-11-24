@@ -2,10 +2,12 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import TodoList from "./Components/TodoList";
 
+import useStore from "../hooks/useStore";
+
 export default function Home() {
-  const [todos, setTodos] = useState([
-    { title: "test Todo", id: uuid(), done: true },
-  ]);
+  const todos = useStore((state) => state.todos);
+
+  const setTodos = useStore((state) => state.setTodos);
 
   const [searchQuery, setSearchQuery] = useState("");
 
